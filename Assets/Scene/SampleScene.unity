@@ -302,6 +302,7 @@ MonoBehaviour:
   rightHandOffset: {x: 0, y: 0.1, z: -0.05}
   Grabtime: 1
   GrabObject: {fileID: 0}
+  PickedObject: {fileID: 0}
 --- !u!136 &1163176083
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -508,7 +509,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d6856067af7a2dc4c96e081ac7ce1f0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
