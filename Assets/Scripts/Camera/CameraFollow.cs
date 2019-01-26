@@ -10,23 +10,19 @@ public class CameraFollow : MonoBehaviour {
     public float CameraSmooth = 0.99f;
     public float CameraShake = 0.0f;
     public float HandHeld = 0.0f;
-    // Use this for initialization
+
     void Awake () {
 
         if (null == FollowTarget) {
             var t = FindObjectOfType<CharController>();
             FollowTarget = t? t.gameObject : null;
         }
-        Debug.Log("FollowTarget = " + FollowTarget);
-
        
         FollowOffset = this.transform.position - FollowTarget.transform.position;
-        Debug.Log("FollowOffset = " + FollowOffset);
 
     }
 
     float elapsedTime = 0.0f;
-	// Update is called once per frame
 	void Update () {
         elapsedTime += Time.deltaTime;
         Vector3 TargetPosition = FollowTarget.transform.position;
