@@ -41,4 +41,5 @@ public class CameraFollow : MonoBehaviour {
         float shakeRoll = CameraShake * ShakeAmount  * (2.0f * Mathf.PerlinNoise(2.0f, ShakeFrequency * ShakeFrequency *elapsedTime )-1.0f);
         this.transform.Rotate(new Vector3(shakeYaw, shakePitch, shakeRoll));
     }
+
 }
