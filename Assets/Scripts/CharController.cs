@@ -26,6 +26,11 @@ public class CharController : MonoBehaviour {
             Debug.Log("turn = " + turn);
             this.transform.Rotate(Vector3.up, turn * turnSpeed * Time.deltaTime);
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            anim.SetTrigger("Pickup");
+        }
       
 	}
 }
