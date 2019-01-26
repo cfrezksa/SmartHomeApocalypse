@@ -76,11 +76,13 @@ public class CharController : MonoBehaviour
                 GrabObject.transform.position = rightHand.position + offset;
                 GrabObject.transform.parent = rightHand;
                 GrabObject.GetComponent<Collider>().enabled = false;
+                GrabObject.GetComponent<Rigidbody>().isKinematic = true;
                 PickedObject = GrabObject;
                 GrabObject = null;
+            } else {
+                anim.SetIKPosition(AvatarIKGoal.RightHand, GrabObject.transform.position);
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f - weight);
             }
-            anim.SetIKPosition(AvatarIKGoal.RightHand, GrabObject.transform.position);
-            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f - weight);
 
         } else {
             picktime = 0.0f;
