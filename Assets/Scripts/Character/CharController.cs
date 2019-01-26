@@ -16,32 +16,71 @@ public class CharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 moveDir = new Vector3(
+            Input.GetAxis("Horizontal"),
+            0.0f,
+            Input.GetAxis("Vertical")
+            );
+        float walk = moveDir.magnitude;
+        anim.SetFloat("walk", walk);
 
+        moveDir.Normalize();
+        float turn = Mathf.Acos(Vector3.Dot(this.transform.forward, moveDir));
+        if (Vector3.Cross(this.transform.forward, moveDir)[2] < 0.0)
+        {
+            turn *= -1.0f;
+        }
 
+        Debug.DrawLine(this.transform.position, this.transform.position + moveDir, Color.yellow);
 
+        if (walk > 0.1f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(moveDir, Vector3.up);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRot, 0.1f);
+            anim.SetFloat("turn", 0.0f);
+        }
+
+        if (CanGrab() && (Input.GetAxis("Fire1") > 0.0))
+        {
+            Picking = true;
+            anim.SetTrigger("Pickup");
+        }
+
+        if (CanDrop() && (Input.GetAxis("Fire1") > 0.0))
+        {
+            DropObject();
+        }
+        
+    }
+    void UpdateOld()
+    {
         float walk = Input.GetAxis("Vertical");
-        if (Picking == true) walk = 0.0f
-                ;
-        //Debug.Log("walk = " + walk);
+        float turn = Input.GetAxis("Horizontal");
+        if (Picking == true) walk = 0.0f;
+
         anim.SetFloat("walk", walk);
 
         if (walk != 0.0f)
         {
-            float turn = Input.GetAxis("Horizontal");
-            //Debug.Log("turn = " + turn);
             this.transform.Rotate(Vector3.up, turn * turnSpeed * Time.deltaTime);
+            turn = 0.0f;
         }
 
-        if (CanGrab() && Input.GetKeyDown(KeyCode.E))
-        {
-            anim.SetTrigger("Pickup");
-        }
+        Debug.Log("turn=" + turn);
+        anim.SetFloat("turn", turn);
 
+      
     }
 
     bool CanGrab() {
-        return GrabObject != null;
+        return (Picking == false) && (GrabObject != null);
     }
+
+    bool CanDrop()
+    {
+        return (PickedObject != null);
+    }
+
 
     void DisableControl()
     {
@@ -63,40 +102,65 @@ public class CharController : MonoBehaviour
         Debug.DrawLine(rh.position, rh.position + rh.forward, Color.red);
         Debug.DrawLine(rh.position, rh.position + rh.right, Color.green);
         Debug.DrawLine(rh.position, rh.position + rh.up, Color.blue);
+
         if (Picking) {
+
+            if (GrabObject != null)
+            {
+                GrabTargetPos = GrabObject.transform.position;
+            }
+
             picktime += Time.deltaTime;
             float weight = Mathf.Clamp(Mathf.Abs(picktime - Grabtime) / Grabtime, 0.0f, 1.0f);
+
             if (picktime > Grabtime) {
+                if (GrabObject != null)
+                {
+                    TakeObject();
+                }
+            }
+
+            if (picktime > 2.0f*Grabtime)
+            {
                 Picking = false;
                 weight = 0.0f;
-                Transform rightHand = anim.GetBoneTransform(HumanBodyBones.RightHand);
-                Vector3 offset = rightHand.forward * rightHandOffset[0];
-                offset += rightHand.right * rightHandOffset[1];
-                offset += rightHand.up * rightHandOffset[2];
-                GrabObject.transform.position = rightHand.position + offset;
-                GrabObject.transform.parent = rightHand;
-                GrabObject.GetComponent<Collider>().enabled = false;
-                GrabObject.GetComponent<Rigidbody>().isKinematic = true;
-                PickedObject = GrabObject;
-                GrabObject = null;
-            } else {
-                anim.SetIKPosition(AvatarIKGoal.RightHand, GrabObject.transform.position);
+                anim.SetIKPosition(AvatarIKGoal.RightHand, GrabTargetPos);
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f - weight);
+            }
+            else
+            {
+                anim.SetIKPosition(AvatarIKGoal.RightHand, GrabTargetPos);
                 anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f - weight);
             }
 
-        } else {
-            picktime = 0.0f;
-        }
+        } 
     }
-    public Vector3 rightHandOffset;
-    public float Grabtime = 1.0f;
-    bool Picking = false;
-    float picktime = 0.0f;
+
+
+    private void TakeObject()
+    {
+        Transform rightHand = anim.GetBoneTransform(HumanBodyBones.RightHand);
+        Vector3 offset = rightHand.forward * RightPalmOffset[0];
+        offset += rightHand.right * RightPalmOffset[1];
+        offset += rightHand.up * RightPalmOffset[2];
+
+        GrabObject.transform.position = rightHand.position + offset;
+        GrabObject.Take(rightHand);
+        PickedObject = GrabObject;
+        GrabObject = null;
+    }
+
+    private void DropObject()
+    {
+        Debug.Log("Drop");
+        PickedObject.Drop();
+
+    }
+
     void StartPick()
     {
         picktime = 0.0f;
         Picking = true;
-        Debug.Log("StartPick");
     }
     public void AddGrabbable(GrabbableObject other) {
         Debug.Log("Grabbable is near");
@@ -121,4 +185,10 @@ public class CharController : MonoBehaviour
 
     public GrabbableObject GrabObject = null;
     public GrabbableObject PickedObject = null;
+
+    public Vector3 GrabTargetPos;
+    public Vector3 RightPalmOffset;
+    public float Grabtime = 1.0f;
+    bool Picking = false;
+    float picktime = 0.0f;
 }
