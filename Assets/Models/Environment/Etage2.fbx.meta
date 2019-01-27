@@ -155,6 +155,14 @@ ModelImporter:
     400148: Treppe09
     2100000: Material1
     2100002: lambert1
+    2100004: FlurBodenMat
+    2100006: FlurWallMat
+    2100008: BadBodenMat
+    2100010: lambert5
+    2100012: BadWallMat
+    2100014: lambert7
+    2100016: SzWallMat
+    2100018: lambert10
     2300000: BadBoden
     2300002: BadWand1
     2300004: BadWand2
@@ -295,7 +303,47 @@ ModelImporter:
     4300086: AZWand2
     4300088: AZWand1
     4300090: FlurWand05
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BadBodenMat
+    second: {fileID: 2100000, guid: c585ee43de61f6940a337fc2d72ca501, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BadWallMat
+    second: {fileID: 2100000, guid: 3f5b2dd1cebd2d34ba374ce3cd0d6318, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlurBodenMat
+    second: {fileID: 2100000, guid: 5dbc7b8fb0ba2f44b898c7bc528b30af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlurWallMat
+    second: {fileID: 2100000, guid: 8275c1c71c6868c4494c229e250f6cdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material1
+    second: {fileID: 2100000, guid: 173360b0bf7cbf24b8b280235d43f6b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SzWallMat
+    second: {fileID: 2100000, guid: 97c53ad4968ad774d9011994b27ea388, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert5
+    second: {fileID: 2100000, guid: 7c6b6c0ab42f386478ce79aec2299be6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert7
+    second: {fileID: 2100000, guid: 6f0a581a1e4c4c04a811c0e3f0321180, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -326,7 +374,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.01
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -346,7 +394,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
