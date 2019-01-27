@@ -59,6 +59,14 @@ ModelImporter:
     400052: WzWand06
     2100000: Material.001
     2100002: lambert1
+    2100004: KuecheTapete
+    2100006: KuecheBodenMat
+    2100008: EsszimmerTapete
+    2100010: FlurTapete
+    2100012: Esszimmerboden
+    2100014: Wohnzimmerboden
+    2100016: TreppenStufen
+    2100018: TreppeSeite
     2300000: EzBoden
     2300002: EZWand01
     2300004: EZWand02
@@ -125,7 +133,52 @@ ModelImporter:
     4300038: TreppeU
     4300040: Tuer02
     4300042: Tuer
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EsszimmerTapete
+    second: {fileID: 2100000, guid: 5088f42acefa49c47b8f4ea871fb76f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Esszimmerboden
+    second: {fileID: 2100000, guid: c1ad5d558d9a5324bace0f1d85e15553, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlurTapete
+    second: {fileID: 2100000, guid: 82d2b91ed17b914479c72bf2f74af8ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KuecheBodenMat
+    second: {fileID: 2100000, guid: d0e2146e80365b04c9eefeee1de096ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KuecheTapete
+    second: {fileID: 2100000, guid: 135b2b3b0b672a249b11114064d9b586, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: c503e43b734ab7b4dba3166732eee16d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreppeSeite
+    second: {fileID: 2100000, guid: 41b17164acb560040b583ab63ded0e8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreppenStufen
+    second: {fileID: 2100000, guid: b5ddba7e9968f90429121a6faac10684, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wohnzimmerboden
+    second: {fileID: 2100000, guid: 1237edd2a326b9a4f9e171e43f64f725, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -156,7 +209,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.01
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -176,7 +229,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
